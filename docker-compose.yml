@@ -4,10 +4,19 @@ services:
     container_name: apex-mosquitto
     ports:
       - "1883:1883"
-      - "9001:9001"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ./mosquitto.passwd:/mosquitto/config/mosquitto.passwd
+    networks:
+      - apex-network
+
+  website:
+    image: php:8.2-apache
+    container_name: apex-website
+    ports:
+      - "8080:80"
+    volumes:
+      - ./website:/var/www/html
     networks:
       - apex-network
 
@@ -17,7 +26,7 @@ services:
       dockerfile: Dockerfile
     container_name: apex-dashboard
     ports:
-      - "8080:8080"
+      - "8081:8080"
     volumes:
       - ./data:/var/www/html/data
     depends_on:
