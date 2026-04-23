@@ -1,0 +1,32 @@
+[
+  {
+    "id": "alert_1",
+    "panel_id": "panel_apex_1",
+    "panel_input": "DI_2",
+    "type": "fire",
+    "status": "open",
+    "message": "Fire event detected on zone 2.",
+    "reported_at": "2026-04-12T18:55:00+05:30",
+    "updated_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "alert_2",
+    "panel_id": "panel_apex_1",
+    "panel_input": "DI_3",
+    "type": "battery_fault",
+    "status": "open",
+    "message": "Battery status is offline.",
+    "reported_at": "2026-04-12T18:55:00+05:30",
+    "updated_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "alert_3",
+    "panel_id": "panel_apex_2",
+    "panel_input": "DI_2",
+    "type": "low_water",
+    "status": "open",
+    "message": "Water level is below threshold (25%).",
+    "reported_at": "2026-04-12T18:55:00+05:30",
+    "updated_at": "2026-04-12T18:55:00+05:30"
+  }
+]

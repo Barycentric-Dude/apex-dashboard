@@ -1,0 +1,16 @@
+# Ignore Arduino source - not needed for deployment
+NEW_F/
+NEW_F.zip
+
+# OS files
+.DS_Store
+__pycache__/
+*.pyc
+
+# Local config
+.claude/
+session-ses_*.md
+deploy/
+*.zip
+*.pptx
+*.docx

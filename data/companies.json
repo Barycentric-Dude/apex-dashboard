@@ -1,0 +1,29 @@
+[
+    {
+        "id": "company_apex",
+        "name": "Apex Fire Systems",
+        "slug": "apex-internal",
+        "subscription_status": "internal",
+        "subscription_ends_at": null,
+        "panel_limit": 999,
+        "created_at": "2026-04-01T00:00:00+05:30"
+    },
+    {
+        "id": "company_demo",
+        "name": "Demo Industries Ltd",
+        "slug": "demo-industries",
+        "subscription_status": "active",
+        "subscription_ends_at": "2027-04-01",
+        "panel_limit": 10,
+        "created_at": "2026-04-01T00:00:00+05:30"
+    },
+    {
+        "id": "company_51353690",
+        "name": "KWS",
+        "slug": "-",
+        "subscription_status": "active",
+        "subscription_ends_at": "2026-04-14",
+        "panel_limit": 5,
+        "created_at": "2026-04-13T05:42:29+00:00"
+    }
+]

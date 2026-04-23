@@ -1,0 +1,46 @@
+[
+    {
+        "id": "panel_apex_1",
+        "company_id": "company_apex",
+        "name": "HQ Building Fire Panel",
+        "site_name": "Mumbai HQ",
+        "device_id": "APX-HQ-001",
+        "token": "apex-hq-token-001",
+        "water_level_threshold": 30,
+        "reporting_interval_minutes": 12,
+        "created_at": "2026-04-01T00:00:00+05:30"
+    },
+    {
+        "id": "panel_apex_2",
+        "company_id": "company_apex",
+        "name": "Warehouse Fire Panel A",
+        "site_name": "Pune Warehouse",
+        "device_id": "APX-WH-001",
+        "token": "apex-wh-token-001",
+        "water_level_threshold": 30,
+        "reporting_interval_minutes": 12,
+        "created_at": "2026-04-01T00:00:00+05:30"
+    },
+    {
+        "id": "panel_demo_1",
+        "company_id": "company_demo",
+        "name": "Plant Floor Panel",
+        "site_name": "Delhi Plant",
+        "device_id": "APX-DEMO-001",
+        "token": "demo-panel-token-001",
+        "water_level_threshold": 30,
+        "reporting_interval_minutes": 12,
+        "created_at": "2026-04-01T00:00:00+05:30"
+    },
+    {
+        "id": "panel_c2189476",
+        "company_id": "company_51353690",
+        "name": "gas pressure",
+        "site_name": "Chinchwad",
+        "device_id": "AES-003",
+        "token": "25f623aa99678533f6e5a52629885483",
+        "water_level_threshold": 30,
+        "reporting_interval_minutes": 12,
+        "created_at": "2026-04-13T05:44:07+00:00"
+    }
+]

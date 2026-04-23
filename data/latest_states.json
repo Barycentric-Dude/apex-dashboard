@@ -1,0 +1,93 @@
+[
+  {
+    "id": "state_1",
+    "panel_id": "panel_apex_1",
+    "panel_input": "DI_1",
+    "event_type": "NORMAL",
+    "current": 5.12,
+    "device_status": 1,
+    "water_level": 85,
+    "mains_status": 1,
+    "batt_status": 1,
+    "reported_at": "2026-04-12T18:55:00+05:30",
+    "updated_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "state_2",
+    "panel_id": "panel_apex_1",
+    "panel_input": "DI_2",
+    "event_type": "FIRE",
+    "current": 4.50,
+    "device_status": 1,
+    "water_level": 65,
+    "mains_status": 1,
+    "batt_status": 1,
+    "reported_at": "2026-04-12T18:55:00+05:30",
+    "updated_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "state_3",
+    "panel_id": "panel_apex_1",
+    "panel_input": "DI_3",
+    "event_type": "NORMAL",
+    "current": 5.01,
+    "device_status": 1,
+    "water_level": 45,
+    "mains_status": 1,
+    "batt_status": 0,
+    "reported_at": "2026-04-12T18:55:00+05:30",
+    "updated_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "state_4",
+    "panel_id": "panel_apex_2",
+    "panel_input": "DI_1",
+    "event_type": "NORMAL",
+    "current": 5.15,
+    "device_status": 1,
+    "water_level": 90,
+    "mains_status": 1,
+    "batt_status": 1,
+    "reported_at": "2026-04-12T18:55:00+05:30",
+    "updated_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "state_5",
+    "panel_id": "panel_apex_2",
+    "panel_input": "DI_2",
+    "event_type": "FAULT",
+    "current": 4.80,
+    "device_status": 1,
+    "water_level": 25,
+    "mains_status": 1,
+    "batt_status": 1,
+    "reported_at": "2026-04-12T18:55:00+05:30",
+    "updated_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "state_6",
+    "panel_id": "panel_demo_1",
+    "panel_input": "DI_1",
+    "event_type": "NORMAL",
+    "current": 5.08,
+    "device_status": 1,
+    "water_level": 78,
+    "mains_status": 1,
+    "batt_status": 1,
+    "reported_at": "2026-04-12T18:50:00+05:30",
+    "updated_at": "2026-04-12T18:50:00+05:30"
+  },
+  {
+    "id": "state_7",
+    "panel_id": "panel_demo_1",
+    "panel_input": "DI_2",
+    "event_type": "NORMAL",
+    "current": 5.20,
+    "device_status": 1,
+    "water_level": 82,
+    "mains_status": 1,
+    "batt_status": 1,
+    "reported_at": "2026-04-12T18:50:00+05:30",
+    "updated_at": "2026-04-12T18:50:00+05:30"
+  }
+]

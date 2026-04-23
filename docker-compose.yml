@@ -1,0 +1,48 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: apex-mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto.passwd:/mosquitto/config/mosquitto.passwd
+    networks:
+      - apex-network
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apex-dashboard
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/var/www/html/data
+    depends_on:
+      - mosquitto
+    networks:
+      - apex-network
+
+  bridge:
+    build:
+      context: .
+      dockerfile: Dockerfile.bridge
+    container_name: apex-bridge
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+      - MQTT_USERNAME=apex_bridge
+      - MQTT_PASSWORD=dashboard_pass
+      - DASHBOARD_URL=http://dashboard:8080/api
+      - MQTT_TOPICS=sensors/#,panels/#
+    depends_on:
+      - mosquitto
+      - dashboard
+    networks:
+      - apex-network
+
+networks:
+  apex-network:
+    driver: bridge

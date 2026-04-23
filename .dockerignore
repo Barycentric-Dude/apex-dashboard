@@ -1,0 +1,12 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+*.md
+*.txt
+*.pdf
+*.pptx
+*.docx
+tests
+.claude
+session-ses_*.md

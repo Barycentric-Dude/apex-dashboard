@@ -1,0 +1,20 @@
+[
+  {
+    "id": "log_1",
+    "panel_id": "panel_apex_1",
+    "payload": {"device_id": "APX-HQ-001", "panel_input": "DI_1", "event_type": "NORMAL", "current": 5.12, "water_level": 85},
+    "received_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "log_2",
+    "panel_id": "panel_apex_1",
+    "payload": {"device_id": "APX-HQ-001", "panel_input": "DI_2", "event_type": "FIRE", "current": 4.50, "water_level": 65},
+    "received_at": "2026-04-12T18:55:00+05:30"
+  },
+  {
+    "id": "log_3",
+    "panel_id": "panel_apex_2",
+    "payload": {"device_id": "APX-WH-001", "panel_input": "DI_2", "event_type": "FAULT", "current": 4.80, "water_level": 25},
+    "received_at": "2026-04-12T18:55:00+05:30"
+  }
+]
