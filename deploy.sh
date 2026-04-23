@@ -147,6 +147,22 @@ check_nginx() {
         FIXES_APPLIED+=("Installed nginx")
     fi
     
+    if ! command -v php &> /dev/null; then
+        log_warn "PHP not found. Installing..."
+        sudo apt-get update
+        sudo apt-get install -y php php-fpm
+        FIXES_APPLIED+=("Installed PHP and PHP-FPM")
+    else
+        log_info "PHP already installed: $(php -v | head -1)"
+    fi
+    
+    if ! command -v certbot &> /dev/null; then
+        log_warn "certbot not found. Installing..."
+        sudo apt-get update
+        sudo apt-get install -y certbot python3-certbot-nginx
+        FIXES_APPLIED+=("Installed certbot")
+    fi
+    
     # Check existing configs
     if [ -f "/etc/nginx/sites-available/apex-energy" ] || [ -L "/etc/nginx/sites-enabled/apex-energy" ]; then
         log_warn "nginx config exists for main domain"
@@ -292,7 +308,7 @@ deploy_code() {
     sudo mkdir -p "$DASHBOARD_PATH"
     sudo cp -r "$TEMP_DIR/src" "$TEMP_DIR/views" "$DASHBOARD_PATH/"
     
-    for item in public data bridge.py Dockerfile Dockerfile.bridge docker-compose.yml mosquitto.conf mosquitto.passwd; do
+    for item in public data bridge.py Dockerfile Dockerfile.bridge docker-compose.yml mosquitto.passwd; do
         [ -f "$TEMP_DIR/$item" ] && sudo cp -r "$TEMP_DIR/$item" "$DASHBOARD_PATH/"
     done
     
@@ -323,7 +339,7 @@ configure_mqtt() {
 configure_nginx() {
     log_info "Configuring nginx..."
     
-    # Main website config
+    # Main website config (HTTP with SSL challenge)
     sudo tee /etc/nginx/sites-available/apex-energy > /dev/null <<'EOF'
 server {
     listen 80;
@@ -340,10 +356,14 @@ server {
         include snippets/fastcgi-php.conf;
         fastcgi_pass unix:/var/run/php/php-fpm.sock;
     }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/html/apexenergycontrol;
+    }
 }
 EOF
 
-    # Dashboard config
+    # Dashboard config (HTTP with SSL challenge)
     sudo tee /etc/nginx/sites-available/apex-dashboard > /dev/null <<'EOF'
 server {
     listen 80;
@@ -360,6 +380,10 @@ server {
         include snippets/fastcgi-php.conf;
         fastcgi_pass unix:/var/run/php/php-fpm.sock;
     }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/html/dashboard.apexenergycontrol;
+    }
 }
 EOF
 
@@ -369,6 +393,40 @@ EOF
     sudo nginx -t && sudo systemctl reload nginx
     
     log_info "nginx configured"
+    
+    # Request SSL certificates
+    setup_ssl_certs
+}
+
+# ============================================
+# 11b. SETUP SSL CERTIFICATES
+# ============================================
+setup_ssl_certs() {
+    log_info "Setting up SSL certificates..."
+    
+    domains=("apexenergycontrol.com" "www.apexenergycontrol.com" "dashboard.apexenergycontrol.com")
+    
+    for domain in "${domains[@]}"; do
+        cert_path="/etc/letsencrypt/live/$domain"
+        if [ ! -d "$cert_path" ]; then
+            log_info "Requesting certificate for $domain..."
+            sudo certbot certonly --nginx -d "$domain" --non-interactive --agree-tos -m admin@$domain 2>/dev/null || \
+            sudo certbot certonly --webroot -w /var/www/html/apexenergycontrol -d "$domain" --non-interactive --agree-tos -m admin@$domain 2>/dev/null || \
+            {
+                log_warn "Failed to get certificate for $domain - will retry later"
+                ISSUES_FOUND+=("SSL certificate pending for $domain")
+            }
+        else
+            log_info "SSL certificate already exists for $domain"
+        fi
+    done
+    
+    # Setup auto-renewal cron
+    if ! sudo crontab -l 2>/dev/null | grep -q "certbot"; then
+        echo "0 3 * * * sudo certbot renew --quiet --deploy-hook 'systemctl reload nginx'" | sudo crontab -
+        log_info "SSL auto-renewal cron job added"
+        FIXES_APPLIED+=("Added SSL auto-renewal cron")
+    fi
 }
 
 # ============================================
@@ -379,6 +437,33 @@ start_containers() {
     
     cd "$DASHBOARD_PATH"
     sudo docker-compose up -d --build
+    
+    # Health check
+    sleep 8
+    log_info "Checking container health..."
+    
+    if sudo docker ps | grep -q "apex-dashboard"; then
+        log_info "Dashboard container: RUNNING"
+    else
+        log_error "Dashboard container: FAILED"
+        ISSUES_FOUND+=("Dashboard container failed to start")
+    fi
+    
+    if sudo docker ps | grep -q "apex-bridge"; then
+        log_info "Bridge container: RUNNING"
+    else
+        log_error "Bridge container: FAILED"
+        ISSUES_FOUND+=("Bridge container failed to start")
+    fi
+    
+    # Verify API responds
+    sleep 2
+    if curl -sf -o /dev/null http://127.0.0.1:8081/api/health 2>/dev/null; then
+        log_info "Dashboard API: RESPONDING"
+    else
+        log_warn "Dashboard API: NOT RESPONDING (may need more time)"
+        ISSUES_FOUND+=("Dashboard API not responding on port 8081")
+    fi
     
     log_info "Containers started"
 }
