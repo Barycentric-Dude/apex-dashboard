@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<title>APEX SmartConnect Panel | APEX ENERGY CONTROL</title>
+
+<!-- Fav Icon -->
+<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+
+
+
+<!-- Stylesheets -->
+<link href="assets/css/font-awesome-all.css" rel="stylesheet">
+<link href="assets/css/flaticon.css" rel="stylesheet">
+<link href="assets/css/owl.css" rel="stylesheet">
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="assets/css/animate.css" rel="stylesheet">
+<link href="assets/css/imagebg.css" rel="stylesheet">
+<link href="assets/css/color/theme-color.css" id="jssDefault" rel="stylesheet">
+<link href="assets/css/switcher-style.css" rel="stylesheet">
+<link href="assets/css/rtl.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/responsive.css" rel="stylesheet">
+
+</head>
+
+
+    <style>
+        body { font-family: var(--font-primary); }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-primary); }
+    </style>
+<!-- page wrapper -->
+<body class="boxed_wrapper ltr">
+
+    <!-- preloader -->
+    <div class="preloader"></div>
+    <!-- preloader -->
+
+    <!-- page-direction -->
+    <div class="page_direction">
+        <div class="demo-rtl direction_switch"><button class="rtl">RTL</button></div>
+        <div class="demo-ltr direction_switch"><button class="ltr">LTR</button></div>
+    </div>
+    <!-- page-direction end -->
+
+
+    <!-- switcher menu -->
+    <div class="switcher">
+        <div class="switch_btn">
+            <button><i class="fas fa-palette"></i></button>
+        </div>
+        <div class="switch_menu">
+            <!-- color changer -->
+            <div class="switcher_container">
+                <ul id="styleOptions" title="switch styling">
+                    <li>
+                        <a href="javascript: void(0)" data-theme="blue" class="blue-color"></a>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0)" data-theme="pink" class="pink-color"></a>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0)" data-theme="violet" class="violet-color"></a>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0)" data-theme="crimson" class="crimson-color"></a>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0)" data-theme="orange" class="orange-color"></a>
+                    </li>
+                </ul>
+            </div> 
+        </div>
+    </div>
+    <!-- end switcher menu -->
+
+    <!-- main header -->
+    <header class="main-header">
+        <div class="outer-container">
+            <div class="header-upper clearfix">
+                <div class="outer-box pull-left">
+                    <div class="logo-box pull-left">
+                        <figure class="logo"><a href="index.html"><img src="assets/images/logo.png" alt=""></a></figure>
+                    </div>
+                    <div class="menu-area pull-left">
+                        <!--Mobile Navigation Toggler-->
+                        <div class="mobile-nav-toggler">
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                        </div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li class="dropdown"><a href="about.html">Home</a>
+                                        <ul>
+                                            <li><a href="index.html">Home Page One</a></li>
+                                            
+                                            <li class="dropdown"><a href="about.html">Home Page</a>
+                                                <ul>
+                                                    <li><a href="index.html">Home Page One</a></li>
+                                                    
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li> 
+                                    <li class="dropdown"><a href="about.html">Services</a>
+                                        <ul>
+                                            
+                                            <li><a href="service-2.html">Services Two</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="current dropdown"><a href="about.html">About</a>
+                                        
+                                    </li>
+                                   
+                                                            
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="menu-right-content pull-right">
+                    <div class="phone">Call Us <a href="tel:880762009">+880.762.009</a></div>
+                    <div class="btn-box"><a href="about.html">Login</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!--sticky Header-->
+        <div class="sticky-header">
+            <div class="container clearfix">
+                <figure class="logo-box"><a href="index.html"><img src="assets/images/small-logo.png" alt=""></a></figure>
+                <div class="menu-area">
+                    <nav class="main-menu clearfix">
+                        <!--Keep This Empty / Menu will come through Javascript-->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- main-header end -->
+
+    <!-- Mobile Menu  -->
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+        
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="index.html"><img src="assets/images/logo-2.png" alt="" title=""></a></div>
+            <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+            <div class="contact-info">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li>Chicago 12, Melborne City, USA</li>
+                    <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                    <li><a href="mailto:info@example.com">info@example.com</a></li>
+                </ul>
+            </div>
+            <div class="social-links">
+                <ul class="clearfix">
+                    <li><a href="service-2.html"><span class="fab fa-twitter"></span></a></li>
+                    <li><a href="service-2.html"><span class="fab fa-facebook-square"></span></a></li>
+                    <li><a href="service-2.html"><span class="fab fa-pinterest-p"></span></a></li>
+                    <li><a href="service-2.html"><span class="fab fa-instagram"></span></a></li>
+                    <li><a href="service-2.html"><span class="fab fa-youtube"></span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div><!-- End Mobile Menu -->
+
+    
+    <!--Page Title-->
+    <section class="page-title bg-color-1 text-center">
+        <div class="pattern-layer" style="background-image: url(assets/images/content/patterns/service2-pattern1.jpg);"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <h1>APEX SmartConnect Panel</h1>
+                <p>IoT Add-on Panel for Remote Monitoring &amp; Intelligent Alerts</p>
+                <p>The APEX SmartConnect Panel is an advanced Industrial IoT Panel built to improve visibility, reliability, and performance of electrical and pumping systems. It integrates with existing Smart Control Panel setups to deliver real-time monitoring, instant alerts, and remote access—helping teams shift from reactive maintenance to proactive system management.</p>
+                <ul class="bread-crumb clearfix">
+                    <li><a href="index.html">Home</a></li>
+                    <li>APEX SmartConnect Panel</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--End Page Title-->
+
+
+    <!-- service-section -->
+    <section class="service-section service-page sec-pad">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-two wow fadeInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="icon-box">
+                                <div class="shape-box" style="background-image: url(assets/images/shape/shap-5.png);"></div>
+                                <i class="flaticon-file"></i>
+                            </div>
+                            <h4><a href="service.html">Real-Time Monitoring</a></h4>
+                            <p>Continuous visibility of system performance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-two wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="icon-box">
+                                <div class="shape-box" style="background-image: url(assets/images/shape/shap-5.png);"></div>
+                                <i class="flaticon-machine-learning"></i>
+                            </div>
+                            <h4><a href="service.html">Instant Alerts &amp; Notifications</a></h4>
+                            <p>Immediate alerts for faults and failures.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-two wow fadeInRight" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="icon-box">
+                                <div class="shape-box" style="background-image: url(assets/images/shape/shap-5.png);"></div>
+                                <i class="flaticon-data-analytics"></i>
+                            </div>
+                            <h4><a href="service.html">Data Logging &amp; History</a></h4>
+                            <p>Track events, faults, and system data.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-two wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
+                        <div class="inner-box mb_0">
+                            <div class="icon-box">
+                                <div class="shape-box" style="background-image: url(assets/images/shape/shap-5.png);"></div>
+                                <i class="flaticon-laptop"></i>
+                            </div>
+                            <h4><a href="service.html">Cloud Dashboard Access</a></h4>
+                            <p>Monitor systems remotely from anywhere.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-two wow fadeInUp" data-wow-delay="300ms" data-wow-duration="1500ms">
+                        <div class="inner-box mb_0">
+                            <div class="icon-box">
+                                <div class="shape-box" style="background-image: url(assets/images/shape/shap-5.png);"></div>
+                                <i class="flaticon-data-integration"></i>
+                            </div>
+                            <h4><a href="service.html">Electrical Parameter Monitoring</a></h4>
+                            <p>Track voltage, current, and system health.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-two wow fadeInRight" data-wow-delay="300ms" data-wow-duration="1500ms">
+                        <div class="inner-box mb_0">
+                            <div class="icon-box">
+                                <div class="shape-box" style="background-image: url(assets/images/shape/shap-5.png);"></div>
+                                <i class="flaticon-robot"></i>
+                            </div>
+                            <h4><a href="service.html">Seamless Integration</a></h4>
+                            <p>Works with existing panels without major changes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- service-section end -->
+
+
+    <!-- chooseus-section -->
+    <section class="chooseus-section bg-color-1">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                    <div id="content_block_08">
+                        <div class="content-box">
+                            <div class="top-box">
+                                <div class="sec-title wow fadeInUp" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                    <p>Monitoring Capabilities</p>
+                                    <h2>What the System Monitors</h2>
+                                </div>
+                                <div class="text wow fadeInUp" data-wow-delay="200ms" data-wow-duration="1500ms">
+                                    <p>Designed for critical electrical and pumping operations, the APEX SmartConnect Panel functions as a Remote Monitoring Panel that tracks key signals and equipment health in real time.</p>
+                                    <ul class="list-item clearfix" style="margin-top:12px;">
+                                        <li>Pump running status</li>
+                                        <li>Motor faults and trips</li>
+                                        <li>Power supply conditions</li>
+                                        <li>Voltage and current levels</li>
+                                        <li>Alarm signals</li>
+                                        <li>Equipment status</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="inner-box clearfix wow fadeInUp" data-wow-delay="400ms" data-wow-duration="1500ms">
+                                <div class="single-item">
+                                    <div class="icon-box"><i class="flaticon-machine-learning"></i></div>
+                                    <h3>Faster Fault Detection</h3>
+                                    <p>Instant visibility and alerts help identify faults earlier.</p>
+                                </div>
+                                <div class="single-item">
+                                    <div class="icon-box"><i class="flaticon-data-integration"></i></div>
+                                    <h3>Reduced Downtime</h3>
+                                    <p>Act quickly on faults to minimize disruptions.</p>
+                                </div>
+                                <div class="single-item">
+                                    <div class="icon-box"><i class="flaticon-robot"></i></div>
+                                    <h3>Remote Visibility &amp; Control</h3>
+                                    <p>Access key data from anywhere via the cloud dashboard.</p>
+                                </div>
+                                <div class="single-item">
+                                    <div class="icon-box"><i class="flaticon-robot"></i></div>
+                                    <h3>Improved Maintenance Planning</h3>
+                                    <p>Use logs and history to plan proactive maintenance.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div id="image_block_07">
+                        <div class="image-box wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+                             <figure class="image js-tilt"><img src="assets/images/content/service/service2-main.jpg" alt="Industrial control panel with connected monitoring dashboard"></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- chooseus-section end -->
+
+
+    <!-- testimonial-style-two -->
+    <section class="testimonial-style-two text-center">
+        <div class="pattern-layer" style="background-image: url(assets/images/shape/pattern-17.png);"></div>
+        <div class="thumb-box wow zoomIn animated">
+            <figure class="thumb thumb-1"><img src="assets/images/resource/thumb-1.png" alt=""></figure>
+            <figure class="thumb thumb-2"><img src="assets/images/resource/thumb-2.png" alt=""></figure>
+            <figure class="thumb thumb-3"><img src="assets/images/resource/thumb-3.png" alt=""></figure>
+            <figure class="thumb thumb-4"><img src="assets/images/resource/thumb-4.png" alt=""></figure>
+        </div>
+        <div class="auto-container">
+            <div class="upper-box">
+                <div class="sec-title">
+                    <p>Applications</p>
+                    <h2>Where APEX SmartConnect Fits Best</h2>
+                </div>
+                <div class="text">
+                    <p>Built for Industrial IoT Panel deployments where uptime and fast response are critical.</p>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1 inner-column">
+                    <div class="testimonial-carousel-2 owl-carousel owl-theme owl-nav-none">
+                        <div class="testimonial-content">
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="https://img.icons8.com/ios/150/1e5aa8/fire-element.png" alt="Fire pump monitoring icon"></figure>
+                                <p>Enable continuous Pump Monitoring System visibility with instant alerts and remote access.</p>
+                                <div class="author-info">
+                                    <h4>Fire Pump Monitoring</h4>
+                                    <span class="designation">Critical standby systems</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="https://img.icons8.com/ios/150/1e5aa8/water.png" alt="Water pumping systems icon"></figure>
+                                <p>Monitor pump status, trips, and alarms to reduce downtime and support proactive maintenance.</p>
+                                <div class="author-info">
+                                    <h4>Water Pumping Systems</h4>
+                                    <span class="designation">Utilities &amp; campuses</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="https://img.icons8.com/ios/150/1e5aa8/factory.png" alt="Industrial equipment monitoring icon"></figure>
+                                <p>Track equipment health and electrical parameters for faster decision-making and higher reliability.</p>
+                                <div class="author-info">
+                                    <h4>Industrial Equipment Monitoring</h4>
+                                    <span class="designation">Plants &amp; workshops</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="https://img.icons8.com/ios/150/1e5aa8/electrical.png" alt="Electrical panel monitoring icon"></figure>
+                                <p>Upgrade conventional panels into a connected Remote Monitoring Panel without major modifications.</p>
+                                <div class="author-info">
+                                    <h4>Electrical Panel Monitoring</h4>
+                                    <span class="designation">Smart Control Panel upgrade</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- testimonial-style-two end -->
+
+
+    <!-- cta-section -->
+    <section class="cta-section bg-color-2">
+        <div class="pattern-box">
+             <div class="pattern-1" style="background-image: url(assets/images/content/patterns/service2-pattern2.jpg);"></div>
+             <div class="pattern-2" style="background-image: url(assets/images/content/patterns/service2-pattern3.jpg);"></div>
+        </div>
+        <div class="auto-container">
+            <div class="content-box text-center wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
+                <h2>Upgrade Your System with Smart Monitoring</h2>
+                <p>Transform your existing control panel into an intelligent connected system.</p>
+                <a href="contact.html" class="theme-btn style-three">Request Product Demo</a>
+                <a href="service-2.html" class="theme-btn style-one">Download Brochure</a>
+            </div>
+        </div>
+    </section>
+    <!-- cta-sectione end -->
+
+
+    <!-- main-footer -->
+    <footer class="main-footer">
+        <div class="auto-container">
+            <div class="footer-top">
+                <div class="widget-section wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
+                    <div class="row clearfix">
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget logo-widget">
+                                <figure class="footer-logo"><a href="index.html"><img src="assets/images/footer-logo.png" alt=""></a></figure>
+                                <div class="text">
+                                    <p>Lorem ipsum dolor amet consectetur adipielit sed eiusm tempor incididunt ut labore dolore.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget links-widget">
+                                <div class="widget-title">
+                                    <h3>Quick Link</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul>
+                                        <li><a href="service-2.html">Company History</a></li>
+                                        <li><a href="service-2.html">About Us</a></li>
+                                        <li><a href="service-2.html">Contact Us</a></li>
+                                        <li><a href="service-2.html">Services</a></li>
+                                        <li><a href="service-2.html">Privacy Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget links-widget">
+                                <div class="widget-title">
+                                    <h3>Services</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul>
+                                        <li><a href="service-2.html">Company History</a></li>
+                                        <li><a href="service-2.html">About Us</a></li>
+                                        <li><a href="service-2.html">Contact Us</a></li>
+                                        <li><a href="service-2.html">Services</a></li>
+                                        <li><a href="service-2.html">Privacy Policy</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 footer-column">
+                            <div class="footer-widget contact-widget">
+                                <div class="widget-title">
+                                    <h3>Contact Info</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul>
+                                        <li>Flat 20, Reynolds Neck, North Hele naville, FV77 8WS</li>
+                                        <li><a href="tel:23055873407">+2(305) 587-3407</a></li>
+                                        <li><a href="mailto:info@example.com">info@example.com</a></li>
+                                    </ul>
+                                </div>
+                                <ul class="social-links clearfix">
+                                    <li><a href="service-2.html"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="service-2.html"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="service-2.html"><i class="fab fa-vimeo-v"></i></a></li>
+                                    <li><a href="service-2.html"><i class="fab fa-linkedin-in"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom clearfix">
+                <div class="copyright pull-left">
+                    <p><a href="index.html">Detox</a> &copy; 2020 All Right Reserved</p>
+                </div>
+                <ul class="footer-nav pull-right">
+                    <li><a href="service-2.html">Terms of Service</a></li>
+                    <li><a href="service-2.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- main-footer end -->
+
+
+
+<!--Scroll to top-->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <span class="fa fa-arrow-up"></span>
+</button>
+
+
+<!-- jequery plugins -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/owl.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/validation.js"></script>
+<script src="assets/js/jquery.fancybox.js"></script>
+<script src="assets/js/appear.js"></script>
+<script src="assets/js/scrollbar.js"></script>
+<script src="assets/js/tilt.jquery.js"></script>
+<script src="assets/js/jQuery.style.switcher.min.js"></script>
+
+<!-- main-js -->
+<script src="assets/js/script.js"></script>
+
+</body><!-- End of .page_wrapper -->
+</html>
