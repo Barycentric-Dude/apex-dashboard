@@ -1,17 +1,22 @@
 # Apex Fire IoT Dashboard
 
-## Run Locally
+## Run Locally (Docker)
 
 ```bash
-cd /home/bary/Documents/KWS\ OS/projects/Apex
-php -S 127.0.0.1:8080 -t public
+docker-compose up -d
 ```
 
-**URL:** http://127.0.0.1:8080
+**URLs:**
+- Website: http://127.0.0.1:8080
+- Dashboard: http://127.0.0.1:8081
 
-## Docker Deployment
+## Docker Services
 
-See `docker-compose.yml` for service configuration.
+| Service | Port | Purpose |
+|---------|------|---------|
+| website | 8080 | Marketing site |
+| dashboard | 8081 | Dashboard app |
+| mosquitto | 1883 | MQTT broker |
 
 ## Auth Credentials
 
