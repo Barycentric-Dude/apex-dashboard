@@ -16,22 +16,23 @@ function is_nav_active(string $path): string {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= h(($title ?? 'Apex Dashboard')) ?></title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f4f1e8;
-            --surface: #fffdf7;
-            --surface-strong: #1f2937;
-            --text: #14213d;
-            --muted: #5c677d;
-            --border: #d8d1c2;
-            --accent: #cf5c36;
-            --accent-soft: #ffe3d8;
+            --bg: #f5f6fa;
+            --surface: #ffffff;
+            --surface-strong: #1a1a2e;
+            --text: #222222;
+            --muted: #848484;
+            --border: #e8e8e8;
+            --accent: #6377ee;
+            --accent-soft: #eef0fd;
             --success: #2f855a;
             --warning: #b7791f;
             --danger: #c53030;
-            --link: #1d4ed8;
-            --shadow: 0 10px 24px rgba(20, 33, 61, 0.08);
-            --focus-ring: 0 0 0 3px rgba(207, 92, 54, 0.4);
+            --link: #6377ee;
+            --shadow: 0 10px 24px rgba(99, 119, 238, 0.08);
+            --focus-ring: 0 0 0 3px rgba(99, 119, 238, 0.3);
         }
 
         /* Skip Link - Accessibility */
@@ -57,12 +58,12 @@ function is_nav_active(string $path): string {
         * { box-sizing: border-box; }
         body {
             margin: 0;
-            font-family: Georgia, "Times New Roman", serif;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
             color: var(--text);
-            background:
-                radial-gradient(circle at top left, rgba(207, 92, 54, 0.10), transparent 24%),
-                linear-gradient(180deg, #f7f3ea 0%, var(--bg) 100%);
+            background: var(--bg);
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Focus Visible - Accessibility */
@@ -86,22 +87,29 @@ function is_nav_active(string $path): string {
 
         a { color: var(--link); text-decoration: none; }
         .shell { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Inter', sans-serif; }
 
         .topbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 16px;
-            padding: 18px 0 24px;
+            padding: 16px 24px;
+            background: var(--surface);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
         }
         .brand {
-            font-size: 1.3rem;
-            letter-spacing: 0.04em;
+            font-size: 1.2rem;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
+            color: var(--text);
         }
         .brand-icon {
             width: 28px;
@@ -151,7 +159,7 @@ function is_nav_active(string $path): string {
             justify-content: center;
         }
         .button:hover, button:hover {
-            background: #b84d2f;
+            background: #4f63d2;
         }
         .button:active, button:active {
             transform: scale(0.98);
@@ -392,15 +400,18 @@ function is_nav_active(string $path): string {
             align-items: center;
             justify-content: center;
             padding: 24px;
+            background: linear-gradient(135deg, #eef0fd 0%, #f5f6fa 100%);
+            border-radius: 18px;
         }
         .login-card {
             background: var(--surface);
             border: 1px solid var(--border);
+            border-top: 4px solid var(--accent);
             border-radius: 20px;
             padding: 40px;
             width: 100%;
             max-width: 420px;
-            box-shadow: 0 20px 40px rgba(20, 33, 61, 0.1);
+            box-shadow: 0 20px 40px rgba(99, 119, 238, 0.12);
         }
         .login-brand {
             display: flex;
