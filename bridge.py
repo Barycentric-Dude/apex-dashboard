@@ -126,28 +126,22 @@ def process_for_dashboard(data, panel_id, topic):
 def send_to_dashboard(data):
     """Send transformed data to dashboard API"""
     try:
+        if not DASHBOARD_TOKEN:
+            print("  [ERROR] DASHBOARD_TOKEN is empty; cannot authenticate ingest request")
+            return
+
         headers = {
-            'Authorization': DASHBOARD_TOKEN,
+            'X-Panel-Token': DASHBOARD_TOKEN,
             'Content-Type': 'application/json'
         }
-        
-        # Try telemetry endpoint first (new format)
+
         response = requests.post(
-            f"{DASHBOARD_URL}/telemetry",
+            f"{DASHBOARD_URL.rstrip('/')}/panel-ingest",
             json=data,
             headers=headers,
             timeout=10
         )
-        
-        if response.status_code == 404:
-            # Fallback to legacy ingest endpoint
-            response = requests.post(
-                f"{DASHBOARD_URL}/panel-ingest",
-                json=data,
-                headers=headers,
-                timeout=10
-            )
-        
+
         if response.status_code in [200, 202, 204]:
             print(f"  [OK] Data sent successfully: {response.status_code}")
         else:
@@ -217,6 +211,10 @@ if __name__ == "__main__":
     print(f"Dashboard API: {DASHBOARD_URL}")
     print(f"Offline threshold: {OFFLINE_THRESHOLD} minutes")
     print("="*60)
+
+    if not DASHBOARD_TOKEN:
+        print(f"[{datetime.now().isoformat()}] Failed to start bridge: DASHBOARD_TOKEN is required")
+        exit(1)
     
     # Create MQTT client
     client = mqtt.Client(

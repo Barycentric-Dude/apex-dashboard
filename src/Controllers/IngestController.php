@@ -77,18 +77,30 @@ final class IngestController
         $records = array_is_list($payload) ? $payload : [$payload];
         $normalized = [];
 
-        foreach ($records as $record) {
+        foreach ($records as $index => $record) {
             if (!is_array($record)) {
                 throw new RuntimeException('Each payload record must be an object.');
             }
 
+            $recordNumber = $index + 1;
             $panelInput = trim((string) ($record['panel_input'] ?? $record['di'] ?? ''));
             $deviceId = trim((string) ($record['device_id'] ?? ''));
-            $eventType = strtoupper(trim((string) ($record['event_type'] ?? 'NORMAL')));
-            $reportedAt = trim((string) ($record['reported_at'] ?? now_iso()));
+            $eventType = strtoupper(trim((string) ($record['event_type'] ?? '')));
+            $reportedAtRaw = isset($record['reported_at']) ? trim((string) $record['reported_at']) : now_iso();
 
             if ($panelInput === '' || $deviceId === '') {
-                throw new RuntimeException('Each record requires device_id and panel_input.');
+                throw new RuntimeException("Record {$recordNumber}: device_id and panel_input are required.");
+            }
+            if ($eventType === '') {
+                throw new RuntimeException("Record {$recordNumber}: event_type is required.");
+            }
+
+            $deviceStatus = $this->normalizeBinaryField($record, 'device_status', $recordNumber);
+            $mainsStatus = $this->normalizeBinaryField($record, 'mains_status', $recordNumber);
+            $battStatus = $this->normalizeBinaryField($record, 'batt_status', $recordNumber);
+            $reportedAt = strtotime($reportedAtRaw);
+            if ($reportedAt === false) {
+                throw new RuntimeException("Record {$recordNumber}: reported_at must be a valid date/time.");
             }
 
             $normalized[] = [
@@ -96,15 +108,29 @@ final class IngestController
                 'panel_input' => $panelInput,
                 'event_type' => $eventType,
                 'current' => isset($record['current']) ? (float) $record['current'] : null,
-                'device_status' => isset($record['device_status']) ? (int) $record['device_status'] : 0,
+                'device_status' => $deviceStatus,
                 'water_level' => isset($record['water_level']) ? (float) $record['water_level'] : null,
-                'mains_status' => isset($record['mains_status']) ? (int) $record['mains_status'] : 0,
-                'batt_status' => isset($record['batt_status']) ? (int) $record['batt_status'] : 0,
-                'reported_at' => gmdate('c', strtotime($reportedAt)),
+                'mains_status' => $mainsStatus,
+                'batt_status' => $battStatus,
+                'reported_at' => gmdate('c', $reportedAt),
             ];
         }
 
         return $normalized;
+    }
+
+    private function normalizeBinaryField(array $record, string $field, int $recordNumber): int
+    {
+        if (!array_key_exists($field, $record)) {
+            throw new RuntimeException("Record {$recordNumber}: {$field} is required.");
+        }
+
+        $value = (string) $record[$field];
+        if ($value !== '0' && $value !== '1') {
+            throw new RuntimeException("Record {$recordNumber}: {$field} must be 0 or 1.");
+        }
+
+        return (int) $value;
     }
 
     private function upsertLatestState(array $panel, array $record): void
