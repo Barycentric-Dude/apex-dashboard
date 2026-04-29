@@ -18,7 +18,7 @@ MQTT_PORT = int(os.getenv("MQTT_PORT", "1883"))
 MQTT_USERNAME = os.getenv("MQTT_USERNAME", "")
 MQTT_PASSWORD = os.getenv("MQTT_PASSWORD", "")
 MQTT_TOPICS = os.getenv("MQTT_TOPICS", "sensors/#,panels/#").split(",")
-DASHBOARD_URL = os.getenv("DASHBOARD_URL", "http://localhost:8080")
+DASHBOARD_URL = os.getenv("DASHBOARD_URL", "http://127.0.0.1/api")
 DASHBOARD_TOKEN = os.getenv("DASHBOARD_TOKEN", "")
 OFFLINE_THRESHOLD = int(os.getenv("OFFLINE_THRESHOLD", "24"))  # minutes
 
