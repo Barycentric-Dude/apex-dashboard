@@ -58,7 +58,37 @@ function form_value(string $key, string $default = ''): string
     return isset($_POST[$key]) ? trim((string) $_POST[$key]) : $default;
 }
 
-function format_datetime(?string $iso): string
+function csrf_token(): string
+{
+    if (empty($_SESSION['_csrf'])) {
+        $_SESSION['_csrf'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['_csrf'];
+}
+
+function csrf_field(): string
+{
+    return '<input type="hidden" name="_csrf" value="' . csrf_token() . '">';
+}
+
+function verify_csrf(): void
+{
+    $token = $_POST['_csrf'] ?? '';
+    $expected = $_SESSION['_csrf'] ?? '';
+    if ($token === '' || $token !== $expected) {
+        http_response_code(419);
+        echo 'Session expired or invalid request.';
+        exit;
+    }
+}
+
+function form_array(string $key): array
+{
+    $value = $_POST[$key] ?? null;
+    return is_array($value) ? $value : [];
+}
+
+function format_datetime(?string $iso, bool $short = false): string
 {
     if ($iso === null) {
         return 'Never';
@@ -67,5 +97,5 @@ function format_datetime(?string $iso): string
     if ($ts === false) {
         return 'Unknown';
     }
-    return date('M d, H:i', $ts);
+    return $short ? date('M d, Y', $ts) : date('M d, H:i', $ts);
 }

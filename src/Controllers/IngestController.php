@@ -30,9 +30,12 @@ final class IngestController
             $processed = [];
 
             foreach ($records as $record) {
-                $panel = $store->find('panels', fn (array $panelRow): bool => $panelRow['token'] === $token && $panelRow['device_id'] === $record['device_id']);
+                $isNewPanel = false;
+                $panel = $store->find('panels', fn (array $panelRow): bool => $panelRow['device_id'] === $record['device_id']);
                 if ($panel === null) {
-                    json_response(['error' => 'Panel not found for supplied token and device_id.'], 403);
+                    $companyId = $this->resolveCompanyByToken($token, $store);
+                    $panel = $this->autoRegisterPanel($store, $token, $record, $companyId);
+                    $isNewPanel = true;
                 }
 
                 $store->append('telemetry_logs', [
@@ -49,6 +52,8 @@ final class IngestController
                     'panel_id' => $panel['id'],
                     'panel_input' => $record['panel_input'],
                     'reported_at' => $record['reported_at'],
+                    'token' => $panel['token'],
+                    'new_panel' => $isNewPanel,
                 ];
             }
 
@@ -91,6 +96,12 @@ final class IngestController
             if ($panelInput === '' || $deviceId === '') {
                 throw new RuntimeException("Record {$recordNumber}: device_id and panel_input are required.");
             }
+            if (strlen($deviceId) > 64) {
+                throw new RuntimeException("Record {$recordNumber}: device_id exceeds maximum length of 64 characters.");
+            }
+            if (!preg_match('/^[a-zA-Z0-9_:.-]+$/', $deviceId)) {
+                throw new RuntimeException("Record {$recordNumber}: device_id contains invalid characters. Use only letters, numbers, hyphens, underscores, colons, or dots.");
+            }
             if ($eventType === '') {
                 throw new RuntimeException("Record {$recordNumber}: event_type is required.");
             }
@@ -109,7 +120,6 @@ final class IngestController
                 'event_type' => $eventType,
                 'current' => isset($record['current']) ? (float) $record['current'] : null,
                 'device_status' => $deviceStatus,
-                'water_level' => isset($record['water_level']) ? (float) $record['water_level'] : null,
                 'mains_status' => $mainsStatus,
                 'batt_status' => $battStatus,
                 'reported_at' => gmdate('c', $reportedAt),
@@ -144,7 +154,6 @@ final class IngestController
                 $state['event_type'] = $record['event_type'];
                 $state['current'] = $record['current'];
                 $state['device_status'] = $record['device_status'];
-                $state['water_level'] = $record['water_level'];
                 $state['mains_status'] = $record['mains_status'];
                 $state['batt_status'] = $record['batt_status'];
                 $state['reported_at'] = $record['reported_at'];
@@ -163,7 +172,6 @@ final class IngestController
                 'event_type' => $record['event_type'],
                 'current' => $record['current'],
                 'device_status' => $record['device_status'],
-                'water_level' => $record['water_level'],
                 'mains_status' => $record['mains_status'],
                 'batt_status' => $record['batt_status'],
                 'reported_at' => $record['reported_at'],
@@ -172,6 +180,29 @@ final class IngestController
         }
 
         $store->write('latest_states', $states);
+    }
+
+    private function resolveCompanyByToken(string $token, object $store): string
+    {
+        $panel = $store->find('panels', fn (array $p): bool => ($p['token'] ?? '') === $token);
+        return $panel['company_id'] ?? '';
+    }
+
+    private function autoRegisterPanel(object $store, string $token, array $record, string $companyId = ''): array
+    {
+        $panel = [
+            'id' => $store->nextId('panel'),
+            'company_id' => $companyId,
+            'name' => 'Auto-' . $record['device_id'],
+            'site_name' => '',
+            'device_id' => $record['device_id'],
+            'token' => $token,
+
+            'reporting_interval_minutes' => 12,
+            'created_at' => now_iso(),
+        ];
+        $store->append('panels', $panel);
+        return $panel;
     }
 
     private function syncAlerts(array $panel, array $record): void
@@ -190,9 +221,7 @@ final class IngestController
         if ($record['batt_status'] === 0) {
             $rules[] = ['type' => 'battery_fault', 'message' => 'Battery status is off.'];
         }
-        if ($record['water_level'] !== null && $record['water_level'] < (float) $panel['water_level_threshold']) {
-            $rules[] = ['type' => 'low_water', 'message' => 'Water level is below threshold.'];
-        }
+
 
         $store = $this->app['store'];
         $alerts = $store->all('alerts');

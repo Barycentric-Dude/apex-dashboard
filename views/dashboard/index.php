@@ -5,13 +5,13 @@
             <h1 style="font-size: 1.5rem; margin: 4px 0 0;">Operational health</h1>
         </div>
         <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="muted" style="font-size: 0.85rem;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
-                </svg>
-                Updated <?= format_datetime($stats['last_updated'] ?? null) ?>
-            </div>
+                <div class="muted" style="font-size: 0.85rem;" id="last-updated">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    Updated <?= format_datetime($stats['last_updated'] ?? null) ?>
+                </div>
             <button class="button secondary" onclick="location.reload()" style="padding: 8px 12px; min-height: 36px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="23 4 23 10 17 10"/>
@@ -46,7 +46,7 @@
     $alertsClass = ($stats['open_alerts'] ?? 0) > 0 ? 'kpi-warning' : 'kpi-healthy';
     ?>
 
-    <div class="card kpi-card <?= $fireClass ?>">
+    <div class="card kpi-card <?= $fireClass ?>" id="kpi-fire">
         <?php if (($stats['fire_events'] ?? 0) > 0): ?>
             <div class="kpi-alert-badge">ACTION REQUIRED</div>
         <?php endif; ?>
@@ -56,10 +56,10 @@
             </svg>
         </div>
         <div class="label">Fire Events</div>
-        <div class="metric"><?= h((string) ($stats['fire_events'] ?? 0)) ?></div>
+        <div class="metric" id="kpi-fire-count"><?= h((string) ($stats['fire_events'] ?? 0)) ?></div>
     </div>
 
-    <div class="card kpi-card <?= $offlineClass ?>">
+    <div class="card kpi-card <?= $offlineClass ?>" id="kpi-offline">
         <div class="kpi-icon offline">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="1" y1="1" x2="23" y2="23"/>
@@ -72,10 +72,10 @@
             </svg>
         </div>
         <div class="label">Offline Panels</div>
-        <div class="metric"><?= h((string) ($stats['offline_panels'] ?? 0)) ?></div>
+        <div class="metric" id="kpi-offline-count"><?= h((string) ($stats['offline_panels'] ?? 0)) ?></div>
     </div>
 
-    <div class="card kpi-card <?= $alertsClass ?>">
+    <div class="card kpi-card <?= $alertsClass ?>" id="kpi-alerts">
         <div class="kpi-icon alert">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
@@ -84,10 +84,10 @@
             </svg>
         </div>
         <div class="label">Open Alerts</div>
-        <div class="metric"><?= h((string) ($stats['open_alerts'] ?? 0)) ?></div>
+        <div class="metric" id="kpi-alerts-count"><?= h((string) ($stats['open_alerts'] ?? 0)) ?></div>
     </div>
 
-    <div class="card kpi-card kpi-healthy">
+    <div class="card kpi-card kpi-healthy" id="kpi-online">
         <div class="kpi-icon online">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
@@ -95,10 +95,10 @@
             </svg>
         </div>
         <div class="label">Online Panels</div>
-        <div class="metric"><?= h((string) ($stats['online_panels'] ?? 0)) ?></div>
+        <div class="metric" id="kpi-online-count"><?= h((string) ($stats['online_panels'] ?? 0)) ?></div>
     </div>
 
-    <div class="card kpi-card">
+    <div class="card kpi-card" id="kpi-total">
         <div class="kpi-icon total">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="7" height="7"/>
@@ -108,11 +108,11 @@
             </svg>
         </div>
         <div class="label">Total Panels</div>
-        <div class="metric"><?= h((string) ($stats['total_panels'] ?? 0)) ?></div>
+        <div class="metric" id="kpi-total-count"><?= h((string) ($stats['total_panels'] ?? 0)) ?></div>
     </div>
 </section>
 
-<section class="panel-list" aria-label="Panel list">
+<section class="panel-list" aria-label="Panel list" id="panel-list">
     <?php if (empty($panelCards)): ?>
         <div class="empty-state">
             <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">

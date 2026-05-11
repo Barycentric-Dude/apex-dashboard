@@ -1,22 +1,3 @@
-<style>
-.admin-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
-@media (max-width: 900px) { .admin-stats { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 560px) { .admin-stats { grid-template-columns: repeat(2, 1fr); } }
-.stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
-.stat-num { font-size: 1.9rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text); line-height: 1.1; }
-.stat-num.danger { color: var(--danger); }
-.stat-num.warn { color: var(--warning); }
-.stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-top: 4px; }
-.action-link { display: inline-flex; align-items: center; gap: 4px; font-size: 0.8rem; font-weight: 500; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); text-decoration: none; cursor: pointer; transition: background 0.15s; }
-.action-link:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-.action-link.danger { color: var(--danger); border-color: #fca5a5; }
-.action-link.danger:hover { background: #fff1f1; border-color: var(--danger); }
-.action-link svg { flex-shrink: 0; }
-.actions-cell { white-space: nowrap; display: flex; gap: 6px; }
-.alert-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--accent); color: #fff; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
-.alert-link:hover { opacity: 0.9; }
-</style>
-
 <section class="hero">
     <div class="label">Apex admin</div>
     <h1>Provision companies, users, and panels</h1>
@@ -30,39 +11,6 @@
     <div class="flash error" role="alert"><?= h($error) ?></div>
 <?php endif; ?>
 
-<div class="admin-stats">
-    <div class="stat-box">
-        <div class="stat-num"><?= $stats['companies'] ?></div>
-        <div class="stat-label">Companies</div>
-    </div>
-    <div class="stat-box">
-        <div class="stat-num"><?= $stats['users'] ?></div>
-        <div class="stat-label">Users</div>
-    </div>
-    <div class="stat-box">
-        <div class="stat-num"><?= $stats['panels'] ?></div>
-        <div class="stat-label">Panels</div>
-    </div>
-    <div class="stat-box">
-        <div class="stat-num <?= $stats['open_alerts'] > 0 ? 'warn' : '' ?>"><?= $stats['open_alerts'] ?></div>
-        <div class="stat-label">Open Alerts</div>
-    </div>
-    <div class="stat-box">
-        <div class="stat-num <?= $stats['fire_events'] > 0 ? 'danger' : '' ?>"><?= $stats['fire_events'] ?></div>
-        <div class="stat-label">Fire Events</div>
-    </div>
-</div>
-
-<div style="margin-bottom: 20px;">
-    <a href="/admin/alerts" class="alert-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-        Manage Alerts
-        <?php if ($stats['open_alerts'] > 0): ?>
-            <span style="background: rgba(255,255,255,0.25); border-radius: 999px; padding: 1px 7px; font-size: 0.75rem;"><?= $stats['open_alerts'] ?> open</span>
-        <?php endif; ?>
-    </a>
-</div>
-
 <section class="two-col">
     <div class="card">
         <div class="card-header">
@@ -70,6 +18,7 @@
             <div class="label">Create company</div>
         </div>
         <form class="stack" method="post" action="/admin/companies" style="margin-top: 16px;">
+            <?= csrf_field() ?>
             <div class="form-row">
                 <label for="company-name">Company name</label>
                 <input type="text" id="company-name" name="name" placeholder="e.g., Acme Corporation" autocomplete="off" required>
@@ -103,6 +52,7 @@
             <div class="label">Create customer user</div>
         </div>
         <form class="stack" method="post" action="/admin/users" style="margin-top: 16px;">
+            <?= csrf_field() ?>
             <div class="form-row">
                 <label for="user-company">Assign company</label>
                 <select id="user-company" name="company_id" required>
@@ -145,6 +95,7 @@
             <div class="label">Register panel</div>
         </div>
         <form class="stack" method="post" action="/admin/panels" style="margin-top: 16px;">
+            <?= csrf_field() ?>
             <div class="form-row">
                 <label for="panel-company">Assign company</label>
                 <select id="panel-company" name="company_id" required>
@@ -171,10 +122,6 @@
                 <label for="panel-token">Panel token</label>
                 <input type="text" id="panel-token" name="token" placeholder="Leave blank to auto-generate" autocomplete="off">
                 <span class="form-hint">Secret token for MQTT authentication</span>
-            </div>
-            <div class="form-row">
-                <label for="panel-water">Water level threshold (%)</label>
-                <input type="number" id="panel-water" name="water_level_threshold" step="0.01" value="30">
             </div>
             <div class="form-row">
                 <label for="panel-interval">Reporting interval (minutes)</label>
@@ -206,7 +153,7 @@
                         <th>Status</th>
                         <th>Ends</th>
                         <th>Limit</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -218,21 +165,13 @@
                                     <?= h($company['subscription_status']) ?>
                                 </span>
                             </td>
-                            <td style="font-variant-numeric: tabular-nums;"><?= h($company['subscription_ends_at'] ?? '—') ?></td>
+                            <td style="font-variant-numeric: tabular-nums;"><?= format_datetime($company['subscription_ends_at'] ?? null, false) ?></td>
                             <td style="font-variant-numeric: tabular-nums;"><?= h((string) $company['panel_limit']) ?></td>
                             <td>
-                                <div class="actions-cell">
-                                    <a href="/admin/companies/<?= h($company['id']) ?>/edit" class="action-link">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                        Edit
-                                    </a>
-                                    <form method="post" action="/admin/companies/<?= h($company['id']) ?>/delete" style="display:contents;" onsubmit="return confirm('Delete <?= h(addslashes($company['name'])) ?> and all its users and panels? This cannot be undone.')">
-                                        <button type="submit" class="action-link danger">
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
+                                <form method="post" action="/admin/companies/<?= h($company['id']) ?>/delete" onsubmit="return confirm('Delete this company?');">
+                                    <?= csrf_field() ?>
+                                    <button type="submit" class="token-btn" style="color: var(--danger);">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -263,7 +202,7 @@
                         <th>Email</th>
                         <th>Company</th>
                         <th>Role</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -275,7 +214,10 @@
                                 <?php
                                 $companyName = '';
                                 foreach ($companies as $c) {
-                                    if ($c['id'] === $record['company_id']) { $companyName = $c['name']; break; }
+                                    if ($c['id'] === $record['company_id']) {
+                                        $companyName = $c['name'];
+                                        break;
+                                    }
                                 }
                                 ?>
                                 <?= h($companyName ?: $record['company_id']) ?>
@@ -286,18 +228,10 @@
                                 </span>
                             </td>
                             <td>
-                                <div class="actions-cell">
-                                    <a href="/admin/users/<?= h($record['id']) ?>/edit" class="action-link">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                        Edit
-                                    </a>
-                                    <form method="post" action="/admin/users/<?= h($record['id']) ?>/delete" style="display:contents;" onsubmit="return confirm('Delete user <?= h(addslashes($record['name'])) ?>?')">
-                                        <button type="submit" class="action-link danger">
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
+                                <form method="post" action="/admin/users/<?= h($record['id']) ?>/delete" onsubmit="return confirm('Delete this user?');">
+                                    <?= csrf_field() ?>
+                                    <button type="submit" class="token-btn" style="color: var(--danger);">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -326,7 +260,7 @@
                         <th>Company</th>
                         <th>Device</th>
                         <th>Token</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -337,7 +271,10 @@
                                 <?php
                                 $companyName = '';
                                 foreach ($companies as $c) {
-                                    if ($c['id'] === $panel['company_id']) { $companyName = $c['name']; break; }
+                                    if ($c['id'] === $panel['company_id']) {
+                                        $companyName = $c['name'];
+                                        break;
+                                    }
                                 }
                                 ?>
                                 <?= h($companyName ?: $panel['company_id']) ?>
@@ -355,18 +292,10 @@
                                 </span>
                             </td>
                             <td>
-                                <div class="actions-cell">
-                                    <a href="/admin/panels/<?= h($panel['id']) ?>/edit" class="action-link">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                        Edit
-                                    </a>
-                                    <form method="post" action="/admin/panels/<?= h($panel['id']) ?>/delete" style="display:contents;" onsubmit="return confirm('Delete panel <?= h(addslashes($panel['name'])) ?> and all its telemetry data?')">
-                                        <button type="submit" class="action-link danger">
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
+                                <form method="post" action="/admin/panels/<?= h($panel['id']) ?>/delete" onsubmit="return confirm('Delete this panel?');">
+                                    <?= csrf_field() ?>
+                                    <button type="submit" class="token-btn" style="color: var(--danger);">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

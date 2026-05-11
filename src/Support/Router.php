@@ -8,12 +8,12 @@ final class Router
 {
     private array $routes = [];
 
-    public function get(string $path, callable $handler): void
+    public function get(string $path, callable|array $handler): void
     {
         $this->addRoute('GET', $path, $handler);
     }
 
-    public function post(string $path, callable $handler): void
+    public function post(string $path, callable|array $handler): void
     {
         $this->addRoute('POST', $path, $handler);
     }

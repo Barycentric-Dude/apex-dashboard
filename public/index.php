@@ -24,28 +24,25 @@ $router->post('/logout', [$authController, 'logout']);
 
 $router->get('/dashboard', [$dashboardController, 'index']);
 $router->get('/panels/{id}', [$dashboardController, 'panel']);
+$router->get('/panels/{id}/telemetry', [$dashboardController, 'telemetry']);
 
 $router->get('/admin', [$adminController, 'index']);
 $router->post('/admin/companies', [$adminController, 'createCompany']);
 $router->post('/admin/users', [$adminController, 'createUser']);
 $router->post('/admin/panels', [$adminController, 'createPanel']);
-
-$router->get('/admin/companies/{id}/edit', [$adminController, 'editCompanyForm']);
-$router->post('/admin/companies/{id}/edit', [$adminController, 'editCompany']);
 $router->post('/admin/companies/{id}/delete', [$adminController, 'deleteCompany']);
-
-$router->get('/admin/users/{id}/edit', [$adminController, 'editUserForm']);
-$router->post('/admin/users/{id}/edit', [$adminController, 'editUser']);
 $router->post('/admin/users/{id}/delete', [$adminController, 'deleteUser']);
-
-$router->get('/admin/panels/{id}/edit', [$adminController, 'editPanelForm']);
-$router->post('/admin/panels/{id}/edit', [$adminController, 'editPanel']);
 $router->post('/admin/panels/{id}/delete', [$adminController, 'deletePanel']);
-
-$router->get('/admin/alerts', [$adminController, 'alerts']);
-$router->post('/admin/alerts/resolve-all', [$adminController, 'resolveAllAlerts']);
-$router->post('/admin/alerts/{id}/resolve', [$adminController, 'resolveAlert']);
+$router->get('/admin/input-mappings', [$adminController, 'inputMappings']);
+$router->post('/admin/input-mappings', [$adminController, 'saveInputMappings']);
 
 $router->post('/api/panel-ingest', [$ingestController, 'ingest']);
+
+$router->get('/api/panels', [$dashboardController, 'apiPanels']);
+$router->get('/api/panels/{id}', [$dashboardController, 'apiPanel']);
+$router->get('/api/panels/{id}/detail', [$dashboardController, 'apiPanelDetail']);
+$router->get('/api/panels/{id}/telemetry', [$dashboardController, 'apiTelemetry']);
+$router->get('/api/alerts', [$dashboardController, 'apiAlerts']);
+$router->get('/api/dashboard', [$dashboardController, 'apiDashboard']);
 
 $router->dispatch($_SERVER['REQUEST_METHOD'] ?? 'GET', $_SERVER['REQUEST_URI'] ?? '/');

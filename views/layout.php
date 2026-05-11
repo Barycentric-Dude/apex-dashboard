@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-// Helper to determine active nav state
 function is_nav_active(string $path): string {
     $current = $_SERVER['REQUEST_URI'] ?? '/';
     $isActive = $path === '/dashboard'
@@ -35,7 +34,6 @@ function is_nav_active(string $path): string {
             --focus-ring: 0 0 0 3px rgba(99, 119, 238, 0.3);
         }
 
-        /* Skip Link - Accessibility */
         .skip-link {
             position: absolute;
             top: -100px;
@@ -66,17 +64,6 @@ function is_nav_active(string $path): string {
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Focus Visible - Accessibility */
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible,
-        select:focus-visible,
-        [tabindex]:focus-visible {
-            outline: none;
-            box-shadow: var(--focus-ring);
-        }
-
-        /* Reduced Motion Support */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -111,13 +98,7 @@ function is_nav_active(string $path): string {
             gap: 8px;
             color: var(--text);
         }
-        .brand-icon {
-            width: 28px;
-            height: 28px;
-            color: var(--accent);
-        }
 
-        /* Navigation with hover states */
         .nav {
             display: flex;
             gap: 8px;
@@ -138,10 +119,6 @@ function is_nav_active(string $path): string {
             background: var(--accent);
             color: white;
             font-weight: 500;
-        }
-        .nav a[aria-current="page"]:hover {
-            background: var(--accent);
-            color: white;
         }
 
         .button, button {
@@ -189,7 +166,6 @@ function is_nav_active(string $path): string {
         }
         .card { padding: 18px; }
 
-        /* KPI grid */
         .kpi-grid {
             display: grid;
             gap: 16px;
@@ -202,7 +178,6 @@ function is_nav_active(string $path): string {
             .kpi-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Tabular numbers for metrics */
         .metric {
             font-size: 2rem;
             font-weight: bold;
@@ -229,7 +204,6 @@ function is_nav_active(string $path): string {
         .status-warn { color: var(--warning); }
         .status-danger { color: var(--danger); }
 
-        /* Panel Cards with hover state */
         .panel-list { display: grid; gap: 16px; margin-top: 24px; }
         .panel-item {
             display: grid;
@@ -255,9 +229,6 @@ function is_nav_active(string $path): string {
             border-color: rgba(197, 48, 48, 0.5);
             background: #fff6f6;
         }
-        .panel-item.offline:hover {
-            border-color: var(--danger);
-        }
 
         .table-wrap { overflow-x: auto; margin-top: 24px; }
         table { width: 100%; border-collapse: collapse; }
@@ -276,7 +247,6 @@ function is_nav_active(string $path): string {
 
         form.stack { display: grid; gap: 12px; }
 
-        /* Form elements with proper sizing */
         input, select {
             width: 100%;
             padding: 10px 12px;
@@ -296,7 +266,6 @@ function is_nav_active(string $path): string {
             box-shadow: var(--focus-ring);
         }
 
-        /* Form row with label */
         .form-row {
             display: flex;
             flex-direction: column;
@@ -317,7 +286,6 @@ function is_nav_active(string $path): string {
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         }
 
-        /* Card headers */
         .card-header {
             display: flex;
             align-items: center;
@@ -328,7 +296,6 @@ function is_nav_active(string $path): string {
             color: var(--accent);
         }
 
-        /* Button icons */
         .button svg, button[type="submit"] svg {
             vertical-align: middle;
             margin-right: 6px;
@@ -346,7 +313,6 @@ function is_nav_active(string $path): string {
 
         .muted { color: var(--muted); }
 
-        /* User menu */
         .user-menu {
             position: relative;
         }
@@ -379,7 +345,6 @@ function is_nav_active(string $path): string {
             font-weight: 600;
         }
 
-        /* Mobile menu */
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -393,7 +358,6 @@ function is_nav_active(string $path): string {
             height: 24px;
         }
 
-        /* Login page */
         .login-page {
             min-height: 80vh;
             display: flex;
@@ -419,11 +383,6 @@ function is_nav_active(string $path): string {
             justify-content: center;
             gap: 10px;
             margin-bottom: 24px;
-        }
-        .login-logo {
-            width: 36px;
-            height: 36px;
-            color: var(--accent);
         }
         .login-brand-name {
             font-size: 1.5rem;
@@ -465,7 +424,6 @@ function is_nav_active(string $path): string {
             color: var(--success);
         }
 
-        /* Flash error with icon */
         .flash.error {
             display: flex;
             align-items: center;
@@ -502,7 +460,6 @@ function is_nav_active(string $path): string {
             }
         }
 
-        /* Empty state */
         .empty-state {
             text-align: center;
             padding: 48px 24px;
@@ -526,7 +483,6 @@ function is_nav_active(string $path): string {
             font-style: italic;
         }
 
-        /* Token masking */
         .token-mask {
             font-family: ui-monospace, monospace;
             background: var(--surface-strong);
@@ -557,7 +513,6 @@ function is_nav_active(string $path): string {
             border-color: var(--accent);
         }
 
-        /* KPI Card states */
         .kpi-card {
             position: relative;
             border-left: 4px solid var(--border);
@@ -586,7 +541,6 @@ function is_nav_active(string $path): string {
         }
         .kpi-card.kpi-healthy .metric { color: #2f855a; }
 
-        /* KPI Icons */
         .kpi-icon {
             width: 40px;
             height: 40px;
@@ -606,7 +560,6 @@ function is_nav_active(string $path): string {
         .kpi-icon.online { background: #d1fae5; color: #2f855a; }
         .kpi-icon.total { background: var(--bg); color: var(--muted); }
 
-        /* Panel summary cards */
         .panel-summary {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -640,12 +593,6 @@ function is_nav_active(string $path): string {
         .summary-card.summary-ok .summary-icon { background: #d1fae5; color: #2f855a; }
         .summary-card.summary-warn .summary-icon { background: #fef3c7; color: #b7791f; }
         .summary-card.summary-danger .summary-icon { background: #fee2e2; color: #c53030; }
-        .summary-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--muted);
-        }
         .summary-value {
             font-size: 1.5rem;
             font-weight: bold;
@@ -665,20 +612,59 @@ function is_nav_active(string $path): string {
         .summary-freshness.fresh { color: var(--success); }
         .summary-freshness.stale { color: var(--danger); }
 
+        .input-indicator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .input-indicator {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.2s ease-out;
+        }
+
+        .input-indicator.active {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+
+        .input-indicator.fire {
+            background: #fee2e2;
+            border-color: #fca5a5;
+        }
+
+        .input-indicator-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .input-indicator-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .input-indicator-status {
+            font-size: 2rem;
+            margin: 8px 0;
+        }
+
+        .input-indicator-details {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
         @media (max-width: 860px) {
             .summary-grid { grid-template-columns: repeat(3, 1fr); }
         }
         @media (max-width: 540px) {
             .summary-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        /* Empty state icons */
-        .empty-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 16px;
-            color: var(--muted);
-            opacity: 0.5;
         }
 
         .kpi-alert-badge {
@@ -703,6 +689,53 @@ function is_nav_active(string $path): string {
             .panel-item { grid-template-columns: 1fr; }
             .grid { grid-template-columns: 1fr; }
         }
+        .tab-bar {
+            display: flex;
+            gap: 4px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 16px;
+        }
+        .tab {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .tab:hover { color: var(--text); }
+        .tab-active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .filter-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            font-family: inherit;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--surface);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.15s ease-out;
+            line-height: 1.4;
+        }
+        .filter-pill:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+        .filter-pill.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -725,6 +758,7 @@ function is_nav_active(string $path): string {
                 <a href="/dashboard" <?= is_nav_active('/dashboard') ?>>Dashboard</a>
                 <?php if (($user['role'] ?? null) === 'super_admin'): ?>
                     <a href="/admin" <?= is_nav_active('/admin') ?>>Admin</a>
+                    <a href="/admin/input-mappings" <?= is_nav_active('/admin/input-mappings') ?>>Input Mappings</a>
                 <?php endif; ?>
                 <div class="user-menu">
                     <button class="user-menu-trigger" aria-haspopup="true" aria-expanded="false">
@@ -747,7 +781,6 @@ function is_nav_active(string $path): string {
 </div>
 
 <script>
-// Token reveal functionality
 document.querySelectorAll('.toggle-token').forEach(function(btn) {
     btn.addEventListener('click', function() {
         var mask = btn.closest('td').querySelector('.token-mask');
@@ -757,7 +790,6 @@ document.querySelectorAll('.toggle-token').forEach(function(btn) {
     });
 });
 
-// Copy token functionality
 document.querySelectorAll('.copy-token').forEach(function(btn) {
     btn.addEventListener('click', function() {
         var token = btn.dataset.token;
@@ -769,7 +801,6 @@ document.querySelectorAll('.copy-token').forEach(function(btn) {
     });
 });
 
-// Panel filtering functionality
 function filterPanels(searchTerm) {
     searchTerm = searchTerm.toLowerCase();
     document.querySelectorAll('.panel-item').forEach(function(item) {
@@ -793,6 +824,128 @@ function filterStatus(status) {
         else item.style.display = 'none';
     });
 }
+
+(function() {
+    if (!window.location.pathname.endsWith('/dashboard')) return;
+
+    function formatDateTime(iso) {
+        if (!iso) return 'Never';
+        var d = new Date(iso);
+        return d.toLocaleString();
+    }
+
+    function updateDashboard() {
+        fetch('/api/dashboard')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                var stats = data.stats;
+
+                var lastUpdEl = document.getElementById('last-updated');
+                if (lastUpdEl) lastUpdEl.innerHTML =
+                    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">' +
+                    '<circle cx="12" cy="12" r="10"/>' +
+                    '<polyline points="12 6 12 12 16 14"/>' +
+                    '</svg> Updated ' + formatDateTime(stats.last_updated);
+
+                var kpiFire = document.getElementById('kpi-fire-count');
+                if (kpiFire) kpiFire.textContent = stats.fire_events;
+                var kpiOffline = document.getElementById('kpi-offline-count');
+                if (kpiOffline) kpiOffline.textContent = stats.offline_panels;
+                var kpiAlerts = document.getElementById('kpi-alerts-count');
+                if (kpiAlerts) kpiAlerts.textContent = stats.open_alerts;
+                var kpiOnline = document.getElementById('kpi-online-count');
+                if (kpiOnline) kpiOnline.textContent = stats.online_panels;
+                var kpiTotal = document.getElementById('kpi-total-count');
+                if (kpiTotal) kpiTotal.textContent = stats.total_panels;
+
+                var fireCard = document.getElementById('kpi-fire');
+                var offlineCard = document.getElementById('kpi-offline');
+                var alertsCard = document.getElementById('kpi-alerts');
+
+                if (fireCard) {
+                    fireCard.className = 'card kpi-card ' + (stats.fire_events > 0 ? 'kpi-critical' : 'kpi-healthy');
+                    if (stats.fire_events > 0 && !fireCard.querySelector('.kpi-alert-badge')) {
+                        var badge = document.createElement('div');
+                        badge.className = 'kpi-alert-badge';
+                        badge.textContent = 'ACTION REQUIRED';
+                        fireCard.insertBefore(badge, fireCard.firstChild);
+                    }
+                    if (stats.fire_events === 0) {
+                        var existingBadge = fireCard.querySelector('.kpi-alert-badge');
+                        if (existingBadge) existingBadge.remove();
+                    }
+                }
+                if (offlineCard) offlineCard.className = 'card kpi-card ' + (stats.offline_panels > 0 ? 'kpi-danger' : 'kpi-healthy');
+                if (alertsCard) alertsCard.className = 'card kpi-card ' + (stats.open_alerts > 0 ? 'kpi-warning' : 'kpi-healthy');
+
+                var panelList = document.getElementById('panel-list');
+                if (panelList && data.panelCards) {
+                    panelList.innerHTML = '';
+                    if (data.panelCards.length === 0) {
+                        panelList.innerHTML =
+                            '<div class="empty-state">' +
+                            '<svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                            '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>' +
+                            '<rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>' +
+                            '</svg><h3>No panels configured</h3><p>Contact your administrator to subscribe fire panels to your account.</p></div>';
+                    } else {
+                        data.panelCards.forEach(function(item) {
+                            var isOffline = item.is_offline;
+                            var card = document.createElement('a');
+                            card.className = 'panel-item' + (isOffline ? ' offline' : '');
+                            card.href = '/panels/' + encodeURIComponent(item.panel.id);
+                            card.innerHTML =
+                                '<div>' +
+                                    '<div class="label">' + esc(item.company ? item.company.name : 'Unknown company') + '</div>' +
+                                    '<h3 style="margin: 8px 0 6px;">' + esc(item.panel.name) + '</h3>' +
+                                    '<div class="muted">' +
+                                        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">' +
+                                        '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>' +
+                                        '<circle cx="12" cy="10" r="3"/></svg>' +
+                                        esc(item.panel.site_name || 'No site assigned') +
+                                        '<span style="margin: 0 8px;">\u00b7</span>' +
+                                        '<code style="font-size: 0.8rem;">' + esc(item.panel.device_id) + '</code>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div>' +
+                                    '<div class="label">Status</div>' +
+                                    '<div class="status-pill ' + (isOffline ? 'status-danger' : 'status-ok') + '">' +
+                                        (isOffline
+                                            ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/></svg> Offline / stale'
+                                            : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Online'
+                                        ) +
+                                    '</div>' +
+                                '</div>' +
+                                '<div>' +
+                                    '<div class="label">Inputs</div>' +
+                                    '<div class="metric" style="font-size: 1.4rem;">' + item.state_count + '</div>' +
+                                '</div>' +
+                                '<div>' +
+                                    '<div class="label">Open alerts</div>' +
+                                    '<div class="metric" style="font-size: 1.4rem; color: ' + (item.open_alerts > 0 ? 'var(--warning)' : 'inherit') + ';">' + item.open_alerts + '</div>' +
+                                    '<div class="muted">Last: ' + formatDateTime(item.last_reported_at) + '</div>' +
+                                '</div>';
+                            panelList.appendChild(card);
+                        });
+                    }
+
+                    var activeSearch = document.getElementById('panel-search');
+                    if (activeSearch && activeSearch.value) filterPanels(activeSearch.value);
+                    var activeFilter = document.getElementById('panel-filter');
+                    if (activeFilter && activeFilter.value) filterStatus(activeFilter.value);
+                }
+            })
+            .catch(function() {});
+
+    function esc(str) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+    }
+
+    setInterval(updateDashboard, 2000);
+})();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 </body>
 </html>

@@ -17,6 +17,7 @@ final class JsonStore
         'telemetry_logs' => 'telemetry_logs.json',
         'latest_states' => 'latest_states.json',
         'alerts' => 'alerts.json',
+        'input_mappings' => 'input_mappings.json',
     ];
 
     public function __construct(string $basePath)
@@ -164,7 +165,7 @@ final class JsonStore
                 'site_name' => 'Mumbai Plant',
                 'device_id' => 'APX-DEMO-001',
                 'token' => 'demo-panel-token',
-                'water_level_threshold' => 30,
+                
                 'reporting_interval_minutes' => 12,
                 'created_at' => now_iso(),
             ],
@@ -178,7 +179,7 @@ final class JsonStore
                 'event_type' => 'NORMAL',
                 'current' => 5.12,
                 'device_status' => 1,
-                'water_level' => 73,
+                    
                 'mains_status' => 1,
                 'batt_status' => 1,
                 'reported_at' => gmdate('c', strtotime('-8 minutes')),
@@ -191,7 +192,7 @@ final class JsonStore
                 'event_type' => 'FAULT',
                 'current' => 4.96,
                 'device_status' => 1,
-                'water_level' => 28,
+                    
                 'mains_status' => 1,
                 'batt_status' => 1,
                 'reported_at' => gmdate('c', strtotime('-8 minutes')),
@@ -201,12 +202,12 @@ final class JsonStore
 
         $alerts = [
             [
-                'id' => 'alert_demo_low_water',
+                'id' => 'alert_demo_device_offline',
                 'panel_id' => 'panel_demo_1',
                 'panel_input' => 'DI_2',
-                'type' => 'low_water',
+                'type' => 'device_offline',
                 'status' => 'open',
-                'message' => 'Water level is below threshold.',
+                'message' => 'Device status is offline.',
                 'reported_at' => gmdate('c', strtotime('-8 minutes')),
                 'updated_at' => now_iso(),
             ],
@@ -222,7 +223,7 @@ final class JsonStore
                     'event_type' => 'NORMAL',
                     'current' => 5.12,
                     'device_status' => 1,
-                    'water_level' => 73,
+                
                     'mains_status' => 1,
                     'batt_status' => 1,
                     'reported_at' => gmdate('c', strtotime('-8 minutes')),
@@ -238,7 +239,7 @@ final class JsonStore
                     'event_type' => 'FAULT',
                     'current' => 4.96,
                     'device_status' => 1,
-                    'water_level' => 28,
+                
                     'mains_status' => 1,
                     'batt_status' => 1,
                     'reported_at' => gmdate('c', strtotime('-8 minutes')),
